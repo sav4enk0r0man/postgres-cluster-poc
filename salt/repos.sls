@@ -1,3 +1,8 @@
+RPM-GPG-KEY-PGDG:
+  file.managed:
+    - name: /etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
+    - source: https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG
+
 pgdg-common:
   pkgrepo.managed:
     - humanname: PostgreSQL common RPMs for RHEL/CentOS $releasever - $basearch
