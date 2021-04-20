@@ -54,14 +54,6 @@ pgdg95:
     - gpgcheck: 1
     - enabled: True
 
-pgdg95:
-  pkgrepo.managed:
-    - humanname: PostgreSQL 9.5 for RHEL/CentOS $releasever - $basearch
-    - baseurl: https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-$releasever-$basearch
-    - gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
-    - gpgcheck: 1
-    - enabled: True
-
 pgdg-common-testing:
   pkgrepo.managed:
     - humanname: PostgreSQL common testing RPMs for RHEL/CentOS $releasever - $basearch
