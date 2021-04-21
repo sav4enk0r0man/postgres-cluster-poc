@@ -5,3 +5,4 @@ base:
   'postgres*':
     - repos
     - install
+    - configure
