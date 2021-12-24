@@ -196,6 +196,9 @@ module "salt_master" {
     "${length(module.postgres_node2.postgres_fip) > 0 ? element("${module.postgres_node2.postgres_fip}", 0) : null}",
     "${length(module.postgres_node3.postgres_fip) > 0 ? element("${module.postgres_node3.postgres_fip}", 0) : null}",
     "${length(module.postgres_node4.postgres_fip) > 0 ? element("${module.postgres_node4.postgres_fip}", 0) : null}",
+    "${length(module.postgres_node5.postgres_fip) > 0 ? element("${module.postgres_node5.postgres_fip}", 0) : null}",
+    "${length(module.postgres_node6.postgres_fip) > 0 ? element("${module.postgres_node6.postgres_fip}", 0) : null}",
+    "${length(module.postgres_node7.postgres_fip) > 0 ? element("${module.postgres_node7.postgres_fip}", 0) : null}",
   ]
   provision_commands       = [
     "sudo rm -rf /srv",
