@@ -1,5 +1,12 @@
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.14"
+
+  required_providers {
+    openstack = {
+      source  = "terraform-provider-openstack/openstack"
+      version = "~> 1.35.0"
+    }
+  }
 
   backend "s3" {
     bucket   = "postgres-poc"
@@ -7,9 +14,9 @@ terraform {
     endpoint = "https://hb.bizmrg.com"
     region   = "RegionOne"
 
-    skip_requesting_account_id = true
+    #skip_requesting_account_id = true
     skip_credentials_validation = true
-    skip_get_ec2_platforms = true
+    #skip_get_ec2_platforms = true
     skip_metadata_api_check = true
     skip_region_validation = true
 
@@ -109,6 +116,70 @@ module "postgres_node3" {
   postgres_ip_witelist   = "${var.postgres_ip_witelist}"
 }
 
+# Provisioning postgres node4
+module "postgres_node4" {
+  source                 = "./postgres"
+
+  hostname               = "postgres4"
+  network_id             = "${openstack_networking_network_v2.postgres_network.id}"
+  subnet_id              = "${openstack_networking_subnet_v2.postgres_subnet.id}"
+  internal_network_id    = "${openstack_networking_network_v2.postgres_internal_network.id}"
+  internal_subnet_id     = "${openstack_networking_subnet_v2.postgres_internal_subnet.id}"
+  postgres_keypair       = "${var.keypair}"
+  ssh_dir                = "${var.ssh_dir}"
+  ssh_private_key        = "${var.ssh_private_key}"
+  postgres_enable        = "${var.enable}"
+  postgres_ip_witelist   = "${var.postgres_ip_witelist}"
+}
+
+# Provisioning postgres node5
+module "postgres_node5" {
+  source                 = "./postgres"
+
+  hostname               = "postgres5"
+  network_id             = "${openstack_networking_network_v2.postgres_network.id}"
+  subnet_id              = "${openstack_networking_subnet_v2.postgres_subnet.id}"
+  internal_network_id    = "${openstack_networking_network_v2.postgres_internal_network.id}"
+  internal_subnet_id     = "${openstack_networking_subnet_v2.postgres_internal_subnet.id}"
+  postgres_keypair       = "${var.keypair}"
+  ssh_dir                = "${var.ssh_dir}"
+  ssh_private_key        = "${var.ssh_private_key}"
+  postgres_enable        = "${var.enable}"
+  postgres_ip_witelist   = "${var.postgres_ip_witelist}"
+}
+
+# Provisioning postgres node6
+module "postgres_node6" {
+  source                 = "./postgres"
+
+  hostname               = "postgres6"
+  network_id             = "${openstack_networking_network_v2.postgres_network.id}"
+  subnet_id              = "${openstack_networking_subnet_v2.postgres_subnet.id}"
+  internal_network_id    = "${openstack_networking_network_v2.postgres_internal_network.id}"
+  internal_subnet_id     = "${openstack_networking_subnet_v2.postgres_internal_subnet.id}"
+  postgres_keypair       = "${var.keypair}"
+  ssh_dir                = "${var.ssh_dir}"
+  ssh_private_key        = "${var.ssh_private_key}"
+  postgres_enable        = "${var.enable}"
+  postgres_ip_witelist   = "${var.postgres_ip_witelist}"
+}
+
+# Provisioning postgres node7
+module "postgres_node7" {
+  source                 = "./postgres"
+
+  hostname               = "postgres7"
+  network_id             = "${openstack_networking_network_v2.postgres_network.id}"
+  subnet_id              = "${openstack_networking_subnet_v2.postgres_subnet.id}"
+  internal_network_id    = "${openstack_networking_network_v2.postgres_internal_network.id}"
+  internal_subnet_id     = "${openstack_networking_subnet_v2.postgres_internal_subnet.id}"
+  postgres_keypair       = "${var.keypair}"
+  ssh_dir                = "${var.ssh_dir}"
+  ssh_private_key        = "${var.ssh_private_key}"
+  postgres_enable        = "${var.enable}"
+  postgres_ip_witelist   = "${var.postgres_ip_witelist}"
+}
+
 # Provisioning Salt master host
 module "salt_master" {
   source                   = "./salt-master"
@@ -124,6 +195,7 @@ module "salt_master" {
     "${length(module.postgres_node1.postgres_fip) > 0 ? element("${module.postgres_node1.postgres_fip}", 0) : null}",
     "${length(module.postgres_node2.postgres_fip) > 0 ? element("${module.postgres_node2.postgres_fip}", 0) : null}",
     "${length(module.postgres_node3.postgres_fip) > 0 ? element("${module.postgres_node3.postgres_fip}", 0) : null}",
+    "${length(module.postgres_node4.postgres_fip) > 0 ? element("${module.postgres_node4.postgres_fip}", 0) : null}",
   ]
   provision_commands       = [
     "sudo rm -rf /srv",

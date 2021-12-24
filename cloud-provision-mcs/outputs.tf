@@ -31,6 +31,45 @@ output "postgres_node3_network" {
   value = "${module.postgres_node3.postgres_network}"
 }
 
+output "postgres_node4_fip" {
+  description = "postgres node4 fip"
+  value = "${module.postgres_node4.postgres_fip}"
+}
+
+output "postgres_node4_network" {
+  description = "postgres network"
+  value = "${module.postgres_node4.postgres_network}"
+}
+
+output "postgres_node5_fip" {
+  description = "postgres node5 fip"
+  value = "${module.postgres_node5.postgres_fip}"
+}
+
+output "postgres_node5_network" {
+  description = "postgres network"
+  value = "${module.postgres_node5.postgres_network}"
+}
+
+output "postgres_node6_fip" {
+  description = "postgres node6 fip"
+  value = "${module.postgres_node6.postgres_fip}"
+}
+
+output "postgres_node6_network" {
+  description = "postgres network"
+  value = "${module.postgres_node6.postgres_network}"
+}
+
+output "postgres_node7_fip" {
+  description = "postgres node7 fip"
+  value = "${module.postgres_node7.postgres_fip}"
+}
+
+output "postgres_node7_network" {
+  description = "postgres network"
+  value = "${module.postgres_node7.postgres_network}"
+}
 ###############################################################################
 # Salt master outputs
 ###############################################################################
