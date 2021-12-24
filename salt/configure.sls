@@ -1,3 +1,3 @@
-postgresql-13:
+postgresql-{{ pillar['postgresql_version'] }}:
   service.running:
     - enable: True
